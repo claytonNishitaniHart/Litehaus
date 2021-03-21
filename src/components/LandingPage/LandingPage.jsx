@@ -8,8 +8,6 @@ const LandingPage = () => {
   const [hovered, setHovered] = useState(false);
   const arrow = hovered ? <HiArrowNarrowRight className={styles.chevron} /> : <HiChevronRight className={styles.chevron} />
 
-  console.log(hovered);
-
   return (
     <main className={styles.wrapper}>
       <img className={styles.logo} src={lighthouse} alt='A cartoon lighthouse' />

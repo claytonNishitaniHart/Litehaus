@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1000px) {
   .wrapper {
     text-align: left;
     padding-left: 10vw;
@@ -15,7 +15,7 @@
   transform: translateY(-7.1rem);
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1000px) {
   .container {
     display: inline-block;
     position: absolute;
@@ -38,7 +38,7 @@
   color: white;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1000px) {
   .title {
     margin: 0;
     font-size: 6rem;
@@ -51,7 +51,7 @@
   color: white;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1000px) {
   .subtitle {
     font-size: 1.5rem;
   }
@@ -72,7 +72,7 @@
   line-height: 5rem;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1000px) {
   .button {
     margin-top: 3rem;
     text-align: center;
