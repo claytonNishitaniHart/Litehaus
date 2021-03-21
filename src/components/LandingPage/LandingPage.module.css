@@ -1,0 +1,84 @@
+.wrapper {
+  position: relative;
+  padding-top: 6.25rem;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .wrapper {
+    text-align: left;
+    padding-left: 10vw;
+  }
+}
+
+.container {
+  transform: translateY(-7.1rem);
+}
+
+@media (min-width: 600px) {
+  .container {
+    display: inline-block;
+    position: absolute;
+    margin: 12.25rem 0.625rem 0 0;
+    top: 0;
+    width: 31.25rem;
+    transform: none;
+  }
+}
+
+.logo {
+  width: 92vw;
+  max-width: 32rem;
+}
+
+.title {
+  font-family: 'Playfair Display SC', serif;
+  font-weight: 900;
+  font-size: 3rem;
+  color: white;
+}
+
+@media (min-width: 600px) {
+  .title {
+    margin: 0;
+    font-size: 6rem;
+  }
+}
+
+.subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: white;
+}
+
+@media (min-width: 600px) {
+  .subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+.button {
+  display: inline-block;
+  margin-top: 5rem;
+  width: 14.0635rem;
+  height: 5rem;
+  background-color: #2570BE;
+  border-radius: 2.5rem;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 400;
+  text-decoration: none;
+  line-height: 5rem;
+}
+
+@media (min-width: 600px) {
+  .button {
+    margin-top: 3rem;
+    text-align: center;
+  }
+}
+
+.chevron {
+  transform: translateY(0.4375rem);
+}
