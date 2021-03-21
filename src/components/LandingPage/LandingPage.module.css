@@ -22,7 +22,7 @@
     margin: 12.25rem 0.625rem 0 0;
     top: 0;
     width: 31.25rem;
-    transform: none;
+    transform: translateX(3rem);
   }
 }
 
