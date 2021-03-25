@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import lighthouse from '../../images/lighthouse.svg';
 import styles from './SignInPage.module.css';
 
-const SignInPage = () => {
+const SignInPage = ({ setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const validateForm = () => {
     if (email.length === 0 ||
@@ -27,7 +29,9 @@ const SignInPage = () => {
         })
       });
       const json = await response.json();
-      console.log(json);
+      setLoggedIn(json.success ? true : false);
+      localStorage.setItem('accessToken', json.token);
+      history.push(json.success ? '/dashboard' : '/signin');
     }
   };
   return (
