@@ -79,6 +79,7 @@
   outline: none;
   transition: border linear 0.125s;
   box-sizing: border-box;
+  padding-left: 1rem;
 }
 
 @media (min-width: 1000px) {

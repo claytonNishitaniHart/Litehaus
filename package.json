@@ -2,10 +2,12 @@
   "name": "litehaus",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://litehaus-api.herokuapp.com",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "dotenv": "^8.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
