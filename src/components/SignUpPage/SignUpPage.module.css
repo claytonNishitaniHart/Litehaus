@@ -70,6 +70,10 @@
   transition: color linear 0.125s;
 }
 
+.label > p {
+  margin: 0.25rem 0;
+}
+
 .input {
   display: block;
   border: #0B2540 2px solid;
@@ -80,6 +84,11 @@
   transition: border linear 0.125s;
   box-sizing: border-box;
   padding-left: 1rem;
+}
+
+.inputMissing::after {
+  content: ' - required';
+  color: #EB5569;
 }
 
 @media (min-width: 1000px) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import lighthouse from '../../images/lighthouse.svg';
 import styles from './SignInPage.module.css';
@@ -6,12 +6,26 @@ import styles from './SignInPage.module.css';
 const SignInPage = ({ setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const emailInput = useRef(null);
+  const passwordInput = useRef(null);
   const history = useHistory();
 
   const validateForm = () => {
-    if (email.length === 0 ||
-      password.length === 0) return false;
-    return true;
+    let valid = true;
+    document.getElementById('passwordLabel').classList.remove(`${styles.inputMissing}`);
+    document.getElementById('emailLabel').classList.remove(`${styles.inputMissing}`);
+    if (password.length === 0) {
+      valid = false
+      passwordInput.current.focus();
+      document.getElementById('passwordLabel').classList.add(`${styles.inputMissing}`);
+    }
+    if (email.length === 0) {
+      valid = false;
+      emailInput.current.focus();
+      document.getElementById('emailLabel').classList.add(`${styles.inputMissing}`);
+    }
+
+    return valid;
   };
 
   const submitForm = async (e) => {
@@ -39,13 +53,13 @@ const SignInPage = ({ setLoggedIn }) => {
       <h1 className={styles.title}><a className={styles.titleLink} href='/'>Litehaus</a></h1>
       <form className={styles.form}>
         <h2 className={styles.header}>Sign In</h2>
-        <label className={styles.label}>
-          Email
-          <input className={styles.input} onChange={(e) => setEmail(e.target.value)} />
+        <label ref={emailInput} className={styles.label}>
+          <p id='emailLabel'>Email</p>
+          <input autoFocus className={styles.input} onChange={(e) => setEmail(e.target.value)} />
         </label>
         <label className={styles.label}>
-          Password
-          <input className={styles.input} type='password' onChange={(e) => setPassword(e.target.value)} />
+          <p id='passwordLabel'>Password</p>
+          <input ref={passwordInput} className={styles.input} type='password' onChange={(e) => setPassword(e.target.value)} />
         </label>
         <button className={styles.button} onClick={(e) => submitForm(e)}>Continue</button>
         <p className={styles.signupText}>Don't have an account? <a className={styles.signupLink} href='/signup'>Sign Up</a></p>
