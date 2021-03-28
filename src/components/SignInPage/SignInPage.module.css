@@ -91,7 +91,7 @@
   outline: none;
   transition: border linear 0.125s;
   box-sizing: border-box;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 }
 
 .inputMissing::after {
@@ -102,6 +102,7 @@
 @media (min-width: 1000px) {
   .input {
     height: 3.125rem;
+    padding-left: 1rem;
   }
 }
 
@@ -153,6 +154,7 @@
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   color: #0B2540;
+  transform: translateY(1rem);
 }
 
 @media (min-width: 1000px) {
