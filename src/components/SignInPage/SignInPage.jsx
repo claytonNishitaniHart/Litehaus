@@ -50,7 +50,10 @@ const SignInPage = ({ setLoggedIn }) => {
   };
   return (
     <main className={styles.wrapper}>
-      <h1 className={styles.title}><a className={styles.titleLink} href='/'>Litehaus</a></h1>
+      <div>
+        <h1 className={styles.title}><a className={styles.titleLink} href='/'>Litehaus</a></h1>
+        <img className={styles.logo} src={lighthouse} alt='A cartoon lighthouse' />
+      </div>
       <form className={styles.form}>
         <h2 className={styles.header}>Sign In</h2>
         <label ref={emailInput} className={styles.label}>
@@ -64,7 +67,6 @@ const SignInPage = ({ setLoggedIn }) => {
         <button className={styles.button} onClick={(e) => submitForm(e)}>Continue</button>
         <p className={styles.signupText}>Don't have an account? <a className={styles.signupLink} href='/signup'>Sign Up</a></p>
       </form>
-      <img className={styles.logo} src={lighthouse} alt='A cartoon lighthouse' />
     </main>
   );
 }

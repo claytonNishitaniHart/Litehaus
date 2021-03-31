@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
+import { HiChevronDown } from 'react-icons/hi';
+
 const Dashboard = ({ setLoggedIn }) => {
   const [user, setUser] = useState({});
   const history = useHistory();
@@ -32,10 +34,19 @@ const Dashboard = ({ setLoggedIn }) => {
   }
 
   return (
-    <>
-      {user.email}
-      <button onClick={() => logout()}>logout</button>
-    </>
+    <main>
+      <h1>Litehaus</h1>
+      <div>
+        <p>Hi, {user.name} 👋</p>
+        <button><HiChevronDown /></button>
+      </div>
+      <div>
+        <button>Account Settings</button>
+        <button onClick={() => logout()}>Logout</button>
+      </div>
+      <h2>Add a new stock</h2>
+      <h2>Stocks you're watching</h2>
+    </main>
   );
 };
 

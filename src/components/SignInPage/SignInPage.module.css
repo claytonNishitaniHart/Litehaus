@@ -5,9 +5,12 @@
 
 @media (min-width: 1000px) {
   .wrapper {
-    position: relative;
-    text-align: left;
-    padding: 2rem 10vw 0 10vw;
+    height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    padding: 20vh 10vw 20vh 10vw;
   }
 }
 
@@ -25,7 +28,8 @@
 
 @media (min-width: 1000px) {
   .title {
-    margin: 0 0 0 3.125rem;
+    position: absolute;
+    transform: translateY(-5.5rem);
   }
 }
 
@@ -43,12 +47,9 @@
 
 @media (min-width: 1000px) {
   .form {
-    position: absolute;
-    top: 6.25rem;
-    right: 9.375rem;
     margin: 0;
     width: 31.25rem;
-    height: 31.25rem;
+    height: fit-content;
   }
 }
 
@@ -78,7 +79,7 @@
 
 @media (min-width: 1000px) {
   .label {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 }
 
@@ -159,8 +160,9 @@
 
 @media (min-width: 1000px) {
   .signupText {
+    position: absolute;
     color: white;
-    transform: translate(-5.4rem, 4rem);
+    transform: translateY(1.5rem);
   }
 }
 
@@ -169,14 +171,20 @@
 }
 
 .logo {
-  margin-top: 6rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2rem;
   width: 8.8125rem;
   height: 8.8125rem;
 }
 
 @media (min-width: 1000px) {
   .logo {
-    margin-top: 1.2rem;
+    position: relative;
+    left: auto;
+    transform: none;
+    bottom: auto;
     width: 32rem;
     height: 32rem;
   }
