@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
-import { HiChevronDown } from 'react-icons/hi';
+import { HiChevronDown, HiOutlineCog, HiOutlineLogout } from 'react-icons/hi';
+import styles from './Dashboard.module.css';
 
 const Dashboard = ({ setLoggedIn }) => {
   const [user, setUser] = useState({});
@@ -33,16 +34,21 @@ const Dashboard = ({ setLoggedIn }) => {
     history.push('/');
   }
 
+  const handleDropDown = () => {
+    const dropdown = document.getElementById(styles.dropDown);
+    dropdown.style.display = dropdown.style.display === 'none' ? 'inline-block' : 'none';
+  }
+
   return (
     <main>
       <h1>Litehaus</h1>
-      <div>
-        <p>Hi, {user.name} 👋</p>
-        <button><HiChevronDown /></button>
+      <div className={styles.userDropDown}>
+        <p className={styles.greeting}>Hi, {user.name ? user.name.split(' ')[0] : user.name} 👋</p>
+        <button className={styles.dropDownArrow} onClick={() => handleDropDown()}><HiChevronDown /></button>
       </div>
-      <div>
-        <button>Account Settings</button>
-        <button onClick={() => logout()}>Logout</button>
+      <div id={styles.dropDown} style={{ display: 'none' }}>
+        <button className={styles.dropDownButton}><div className={styles.svg}><HiOutlineCog /></div><p>Account Settings</p></button>
+        <button className={styles.dropDownButton} onClick={() => logout()}><div className={styles.svg}><HiOutlineLogout /></div><p>Logout</p></button>
       </div>
       <h2>Add a new stock</h2>
       <h2>Stocks you're watching</h2>
