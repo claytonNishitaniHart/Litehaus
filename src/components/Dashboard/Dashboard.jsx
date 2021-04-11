@@ -10,7 +10,7 @@ const Dashboard = ({ setLoggedIn }) => {
 
   useEffect(() => {
     const auth = `Bearer ${localStorage.getItem('accessToken')}`;
-    fetch('/api/user', {
+    fetch('https://litehaus-api.herokuapp.com/api/user', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -28,7 +28,7 @@ const Dashboard = ({ setLoggedIn }) => {
   }, []);
 
   const logout = () => {
-    fetch('/api/reset_refresh_token');
+    fetch('https://litehaus-api.herokuapp.com/api/reset_refresh_token');
     localStorage.setItem('accessToken', '');
     setLoggedIn(false);
     history.push('/');

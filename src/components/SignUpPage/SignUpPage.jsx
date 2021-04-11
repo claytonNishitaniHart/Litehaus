@@ -40,7 +40,7 @@ const SignUpPage = ({ setLoggedIn }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await fetch('/api/register', {
+        const response = await fetch('https://litehaus-api.herokuapp.com/api/register', {
           method: 'POST',
           credentials: 'include',
           headers: {

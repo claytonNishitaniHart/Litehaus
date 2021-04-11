@@ -31,7 +31,7 @@ const SignInPage = ({ setLoggedIn }) => {
   const submitForm = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const response = await fetch('/api/login', {
+      const response = await fetch('https://litehaus-api.herokuapp.com/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

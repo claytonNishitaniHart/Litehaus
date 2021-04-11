@@ -9,7 +9,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('/api/refresh_token', {
+    fetch('https://litehaus-api.herokuapp.com/api/refresh_token', {
       method: 'POST',
       credentials: 'include',
       headers: {
