@@ -7,7 +7,22 @@ import Search from '../Search/Search';
 
 const Dashboard = ({ setLoggedIn }) => {
   const [user, setUser] = useState({});
+  const [symbols, setSymbols] = useState(null);
   const history = useHistory();
+
+  useEffect(() => {
+    const auth = `Bearer ${localStorage.getItem('accessToken')}`;
+    fetch('https://litehaus-api.herokuapp.com/api/getSymbols', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': auth
+      }
+    })
+      .then(response => response.json())
+      .then(json => setSymbols(json.symbols));
+  }, []);
 
   useEffect(() => {
     const auth = `Bearer ${localStorage.getItem('accessToken')}`;
@@ -21,7 +36,6 @@ const Dashboard = ({ setLoggedIn }) => {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           setUser(json.user);
         }
@@ -40,6 +54,30 @@ const Dashboard = ({ setLoggedIn }) => {
     dropdown.style.display = dropdown.style.display === 'none' ? 'inline-block' : 'none';
   }
 
+  const handleUpdateSymbols = (e, newSymbol) => {
+    e.preventDefault();
+    const newSymbols = symbols.includes(',' + newSymbol + ',') ? symbols.replace(',' + newSymbol + ',', ',') :
+      symbols.includes(',' + newSymbol) ? symbols.replace(',' + newSymbol, '') :
+        symbols.includes(newSymbol + ',') ? symbols.replace(newSymbol + ',', '') :
+          symbols.includes(newSymbol) ? symbols.replace(newSymbol, '') :
+            symbols ? symbols + ',' + newSymbol : newSymbol;
+
+    const auth = `Bearer ${localStorage.getItem('accessToken')}`;
+    fetch('https://litehaus-api.herokuapp.com/api/setSymbols', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': auth
+      },
+      body: JSON.stringify({
+        symbols: newSymbols
+      })
+    })
+      .then(response => response.json())
+      .then(json => setSymbols(json.user.symbols));
+  }
+
   return (
     <main className={styles.wrapper}>
       <h1 className={styles.title}>Litehaus</h1>
@@ -53,8 +91,9 @@ const Dashboard = ({ setLoggedIn }) => {
       </div>
       <div className={styles.content}>
         <h2 className={styles.add}>Add a new stock</h2>
-        <Search />
+        <Search updateSymbols={handleUpdateSymbols} currentSymbols={symbols} />
         <h2 className={styles.watching}>Stocks you're watching</h2>
+        {symbols}
       </div>
     </main>
   );
