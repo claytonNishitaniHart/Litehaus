@@ -45,10 +45,11 @@ const Dashboard = ({ setLoggedIn }) => {
   }, []);
 
   const logout = () => {
-    fetch(`${URL}/api/reset_refresh_token`)
+    fetch(`${URL}/api/reset_refresh_token`, {
+      credentials: 'include'
+    })
       .then(result => result.json())
       .then(json => {
-        console.log(json);
         localStorage.setItem('accessToken', '');
         setLoggedIn(false);
         history.push('/');
