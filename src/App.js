@@ -5,11 +5,13 @@ import SignInPage from './components/SignInPage/SignInPage';
 import SignUpPage from './components/SignUpPage/SignUpPage';
 import Dashboard from './components/Dashboard/Dashboard';
 
+const URL = 'https://litehaus-api.herokuapp.com';
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch('https://litehaus-api.herokuapp.com/api/refresh_token', {
+    fetch(`${URL}/api/refresh_token`, {
       method: 'POST',
       credentials: 'include',
       headers: {

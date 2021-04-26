@@ -5,6 +5,8 @@ import { HiChevronDown, HiOutlineCog, HiOutlineLogout } from 'react-icons/hi';
 import styles from './Dashboard.module.css';
 import Search from '../Search/Search';
 
+const URL = 'https://litehaus-api.herokuapp.com';
+
 const Dashboard = ({ setLoggedIn }) => {
   const [user, setUser] = useState({});
   const [symbols, setSymbols] = useState(null);
@@ -12,7 +14,7 @@ const Dashboard = ({ setLoggedIn }) => {
 
   useEffect(() => {
     const auth = `Bearer ${localStorage.getItem('accessToken')}`;
-    fetch('https://litehaus-api.herokuapp.com/api/getSymbols', {
+    fetch(`${URL}/api/getSymbols`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -26,7 +28,7 @@ const Dashboard = ({ setLoggedIn }) => {
 
   useEffect(() => {
     const auth = `Bearer ${localStorage.getItem('accessToken')}`;
-    fetch('https://litehaus-api.herokuapp.com/api/user', {
+    fetch(`${URL}/api/user`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -43,10 +45,14 @@ const Dashboard = ({ setLoggedIn }) => {
   }, []);
 
   const logout = () => {
-    fetch('https://litehaus-api.herokuapp.com/api/reset_refresh_token');
-    localStorage.setItem('accessToken', '');
-    setLoggedIn(false);
-    history.push('/');
+    fetch(`${URL}/api/reset_refresh_token`)
+      .then(result => result.json())
+      .then(json => {
+        console.log(json);
+        localStorage.setItem('accessToken', '');
+        setLoggedIn(false);
+        history.push('/');
+      });
   }
 
   const handleDropDown = () => {
@@ -63,7 +69,7 @@ const Dashboard = ({ setLoggedIn }) => {
             symbols ? symbols + ',' + newSymbol : newSymbol;
 
     const auth = `Bearer ${localStorage.getItem('accessToken')}`;
-    fetch('https://litehaus-api.herokuapp.com/api/setSymbols', {
+    fetch(`${URL}/api/setSymbols`, {
       method: 'POST',
       credentials: 'include',
       headers: {

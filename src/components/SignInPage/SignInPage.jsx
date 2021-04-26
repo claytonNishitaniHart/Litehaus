@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 import lighthouse from '../../images/lighthouse.svg';
 import styles from './SignInPage.module.css';
 
+const URL = 'https://litehaus-api.herokuapp.com';
+
 const SignInPage = ({ setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +33,7 @@ const SignInPage = ({ setLoggedIn }) => {
   const submitForm = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const response = await fetch('https://litehaus-api.herokuapp.com/api/login', {
+      const response = await fetch(`${URL}/api/login`, {
         method: 'POST',
         credentials: 'include',
         headers: {
