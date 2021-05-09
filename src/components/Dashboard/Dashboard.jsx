@@ -63,11 +63,15 @@ const Dashboard = ({ setLoggedIn }) => {
 
   const handleUpdateSymbols = (e, newSymbol) => {
     e.preventDefault();
-    const newSymbols = symbols.includes(',' + newSymbol + ',') ? symbols.replace(',' + newSymbol + ',', ',') :
-      symbols.includes(',' + newSymbol) ? symbols.replace(',' + newSymbol, '') :
-        symbols.includes(newSymbol + ',') ? symbols.replace(newSymbol + ',', '') :
-          symbols.includes(newSymbol) ? symbols.replace(newSymbol, '') :
-            symbols ? symbols + ',' + newSymbol : newSymbol;
+    let symbolsArr = symbols.split(',');
+    if (symbolsArr.includes(newSymbol)) {
+      symbolsArr = symbolsArr.filter((x) => {
+        return x !== newSymbol;
+      });
+    } else {
+      symbolsArr.push(newSymbol);
+    }
+    const newSymbols = symbolsArr.join(',');
 
     const auth = `Bearer ${localStorage.getItem('accessToken')}`;
     fetch(`${URL}/api/setSymbols`, {

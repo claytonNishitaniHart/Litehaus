@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './Search.module.css';
 
 const Search = ({ updateSymbols, currentSymbols }) => {
   const [results, setResults] = useState(null);
@@ -9,12 +10,12 @@ const Search = ({ updateSymbols, currentSymbols }) => {
   };
 
   return (
-    <form>
-      <label>Search</label>
-      <input onChange={(e) => search(e.target.value)} />
-      <ul>
+    <form className={styles.form}>
+      <label className={styles.label}>Search</label>
+      <input className={`${styles.input} ${results && results.length > 0 ? styles.inputShowing : ''}`} onChange={(e) => search(e.target.value)} />
+      <ul className={results ? styles.results : styles.hidden}>
         {results ? results.map((element, index) => {
-          return (<li key={index}>{element.displaySymbol} {element.description} <button onClick={(e) => updateSymbols(e, element.displaySymbol)}>{currentSymbols.includes(element.displaySymbol) ? '-' : '+'}</button></li>);
+          return (<li key={index}><p className={styles.symbol}>{element.displaySymbol}</p> <p className={styles.description}>{element.description}</p> <button className={styles.button} onClick={(e) => updateSymbols(e, element.displaySymbol)}>{currentSymbols.split(',').includes(element.displaySymbol) ? '-' : '+'}</button></li>);
         }) : <></>}
       </ul>
     </form>
