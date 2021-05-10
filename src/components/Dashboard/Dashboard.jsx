@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { HiChevronDown, HiOutlineCog, HiOutlineLogout } from 'react-icons/hi';
 import styles from './Dashboard.module.css';
 import Search from '../Search/Search';
+import SymbolList from '../SymbolList/SymbolList';
 
 const URL = 'https://litehaus-api.herokuapp.com';
 
@@ -63,7 +64,7 @@ const Dashboard = ({ setLoggedIn }) => {
 
   const handleUpdateSymbols = (e, newSymbol) => {
     e.preventDefault();
-    let symbolsArr = symbols.split(',');
+    let symbolsArr = symbols ? symbols.split(',') : [];
     if (symbolsArr.includes(newSymbol)) {
       symbolsArr = symbolsArr.filter((x) => {
         return x !== newSymbol;
@@ -73,20 +74,32 @@ const Dashboard = ({ setLoggedIn }) => {
     }
     const newSymbols = symbolsArr.join(',');
 
-    const auth = `Bearer ${localStorage.getItem('accessToken')}`;
-    fetch(`${URL}/api/setSymbols`, {
+    fetch(`${URL}/api/refresh_token`, {
       method: 'POST',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json',
-        'authorization': auth
-      },
-      body: JSON.stringify({
-        symbols: newSymbols
-      })
+        'Content-Type': 'application/json'
+      }
     })
       .then(response => response.json())
-      .then(json => setSymbols(json.user.symbols));
+      .then(json => {
+        localStorage.setItem('accessToken', json.token);
+        setLoggedIn(json.token.length > 0 ? true : false);
+        const auth = `Bearer ${localStorage.getItem('accessToken')}`;
+        fetch(`${URL}/api/setSymbols`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': auth
+          },
+          body: JSON.stringify({
+            symbols: newSymbols
+          })
+        })
+          .then(response => response.json())
+          .then(json => setSymbols(json.user.symbols));
+      })
   }
 
   return (
@@ -104,7 +117,7 @@ const Dashboard = ({ setLoggedIn }) => {
         <h2 className={styles.add}>Add a new stock</h2>
         <Search updateSymbols={handleUpdateSymbols} currentSymbols={symbols} />
         <h2 className={styles.watching}>Stocks you're watching</h2>
-        {symbols}
+        <SymbolList symbols={symbols ? symbols.split(',') : []} />
       </div>
     </main>
   );
