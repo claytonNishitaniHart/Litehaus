@@ -16,8 +16,10 @@ const SignInPage = ({ setLoggedIn }) => {
     let valid = true;
     document.getElementById('passwordLabel').classList.remove(`${styles.inputMissing}`);
     document.getElementById('emailLabel').classList.remove(`${styles.inputMissing}`);
+    document.getElementById('passwordLabel').classList.remove(`${styles.passwordInvalid}`);
+    document.getElementById('emailLabel').classList.remove(`${styles.emailInvalid}`);
     if (password.length === 0) {
-      valid = false
+      valid = false;
       passwordInput.current.focus();
       document.getElementById('passwordLabel').classList.add(`${styles.inputMissing}`);
     }
@@ -29,6 +31,22 @@ const SignInPage = ({ setLoggedIn }) => {
 
     return valid;
   };
+
+  const handleErrorStatus = (status) => {
+    switch (status) {
+      case 404:
+        emailInput.current.focus();
+        document.getElementById('emailLabel').classList.add(`${styles.emailInvalid}`);
+        break;
+      case 401:
+        passwordInput.current.focus();
+        document.getElementById('passwordLabel').classList.add(`${styles.passwordInvalid}`);
+        break;
+      default:
+        console.log('unexpected status');
+        break;
+    }
+  }
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -48,6 +66,9 @@ const SignInPage = ({ setLoggedIn }) => {
       setLoggedIn(json.success ? true : false);
       localStorage.setItem('accessToken', json.token);
       history.push(json.success ? '/dashboard' : '/signin');
+      if (!json.success) {
+        handleErrorStatus(response.status);
+      }
     }
   };
   return (
