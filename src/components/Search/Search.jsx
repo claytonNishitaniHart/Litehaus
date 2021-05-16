@@ -9,10 +9,23 @@ const Search = ({ updateSymbols, currentSymbols }) => {
     input.length === 0 ? setResults(null) : setResults(json.result);
   };
 
+  const debounce = (func, wait) => {
+    let timer;
+
+    return function executedFunc(...args) {
+      const later = () => {
+        timer = null;
+        func(...args);
+      }
+      clearTimeout(timer);
+      timer = setTimeout(later, wait);
+    };
+  }
+
   return (
     <form className={styles.form}>
       <label className={styles.label}>Search</label>
-      <input className={`${styles.input} ${results && results.length > 0 ? styles.inputShowing : ''}`} onChange={(e) => search(e.target.value)} />
+      <input className={`${styles.input} ${results && results.length > 0 ? styles.inputShowing : ''}`} onChange={(e) => debounce(search(e.target.value), 300)} />
       <ul className={results ? styles.results : styles.hidden}>
         {results ? results.map((element, index) => {
           return (<li key={index}><p className={styles.symbol}>{element.displaySymbol}</p> <p className={styles.description}>{element.description}</p> <button className={styles.button} onClick={(e) => updateSymbols(e, element.displaySymbol)}>{currentSymbols.split(',').includes(element.displaySymbol) ? '-' : '+'}</button></li>);
