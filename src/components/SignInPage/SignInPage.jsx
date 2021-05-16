@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import lighthouse from '../../images/lighthouse.svg';
+import loading from '../../images/loading.svg';
 import styles from './SignInPage.module.css';
 
 const URL = 'https://litehaus-api.herokuapp.com';
 
 const SignInPage = ({ setLoggedIn }) => {
+  const [working, setWorking] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const emailInput = useRef(null);
@@ -51,6 +53,7 @@ const SignInPage = ({ setLoggedIn }) => {
   const submitForm = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      setWorking(true);
       const response = await fetch(`${URL}/api/login`, {
         method: 'POST',
         credentials: 'include',
@@ -67,6 +70,7 @@ const SignInPage = ({ setLoggedIn }) => {
       localStorage.setItem('accessToken', json.token);
       history.push(json.success ? '/dashboard' : '/signin');
       if (!json.success) {
+        setWorking(false);
         handleErrorStatus(response.status);
       }
     }
@@ -87,7 +91,7 @@ const SignInPage = ({ setLoggedIn }) => {
           <p id='passwordLabel'>Password</p>
           <input ref={passwordInput} className={styles.input} type='password' onChange={(e) => setPassword(e.target.value)} />
         </label>
-        <button className={styles.button} onClick={(e) => submitForm(e)}>Continue</button>
+        <button className={styles.button} onClick={(e) => submitForm(e)}>{working ? <img className={styles.loading} src={loading} alt='loading...' /> : 'Continue'}</button>
         <p className={styles.signupText}>Don't have an account? <a className={styles.signupLink} href='/signup'>Sign Up</a></p>
       </form>
     </main>

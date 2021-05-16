@@ -159,6 +159,11 @@
   0 0 0 10px #EB5569;
 }
 
+.loading {
+  height: 2rem;
+  width: 2rem;
+}
+
 .signupText {
   text-align: center;
   font-family: 'Poppins', sans-serif;

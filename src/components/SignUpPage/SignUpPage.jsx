@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import lighthouse from '../../images/lighthouse.svg';
+import loading from '../../images/loading.svg';
 import styles from './SignUpPage.module.css';
 
 const URL = 'https://litehaus-api.herokuapp.com';
 
 const SignUpPage = ({ setLoggedIn }) => {
+  const [working, setWorking] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +21,7 @@ const SignUpPage = ({ setLoggedIn }) => {
     document.getElementById('passwordLabel').classList.remove(`${styles.inputMissing}`);
     document.getElementById('emailLabel').classList.remove(`${styles.inputMissing}`);
     document.getElementById('nameLabel').classList.remove(`${styles.inputMissing}`);
+    document.getElementById('emailLabel').classList.remove(`${styles.emailInvalid}`);
     if (password.length === 0) {
       valid = false
       passwordInput.current.focus();
@@ -38,28 +41,41 @@ const SignUpPage = ({ setLoggedIn }) => {
     return valid;
   };
 
+  const handleErrorStatus = (status) => {
+    switch (status) {
+      case 400:
+        emailInput.current.focus();
+        document.getElementById('emailLabel').classList.add(`${styles.emailInvalid}`);
+        break;
+      default:
+        console.log('unexpected status');
+        break;
+    }
+  }
+
   const submitForm = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      try {
-        const response = await fetch(`${URL}/api/register`, {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password
-          })
-        });
-        const json = await response.json();
-        setLoggedIn(json.success ? true : false);
-        localStorage.setItem('accessToken', json.token);
-        history.push(json.success ? '/dashboard' : '/signup');
-      } catch (error) {
-        console.log(error);
+      setWorking(true);
+      const response = await fetch(`${URL}/api/register`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password
+        })
+      });
+      const json = await response.json();
+      setLoggedIn(json.success ? true : false);
+      localStorage.setItem('accessToken', json.token);
+      history.push(json.success ? '/dashboard' : '/signup');
+      if (!json.success) {
+        setWorking(false);
+        handleErrorStatus(response.status);
       }
     }
   };
@@ -84,7 +100,7 @@ const SignUpPage = ({ setLoggedIn }) => {
           <p id='passwordLabel'>Password</p>
           <input className={styles.input} type='password' onChange={(e) => setPassword(e.target.value)} />
         </label>
-        <button className={styles.button} onClick={(e) => submitForm(e)}>Continue</button>
+        <button className={styles.button} onClick={(e) => submitForm(e)}>{working ? <img className={styles.loading} src={loading} alt='loading...' /> : 'Continue'}</button>
         <p className={styles.signinText}>Already have an account? <a className={styles.signinLink} href='/signin'>Sign In</a></p>
       </form>
     </main>

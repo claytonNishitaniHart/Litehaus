@@ -94,6 +94,11 @@
   color: #EB5569;
 }
 
+.emailInvalid::after {
+  content: ' - email already exists';
+  color: #EB5569;
+}
+
 @media (min-width: 1000px) {
   .input {
     height: 3.125rem;
@@ -142,6 +147,11 @@
   box-shadow: 
   0 0 0 5px white,
   0 0 0 10px #EB5569;
+}
+
+.loading {
+  height: 2rem;
+  width: 2rem;
 }
 
 .signinText {
