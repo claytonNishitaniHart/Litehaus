@@ -21,6 +21,8 @@ const SymbolListItem = ({ symbol }) => {
       setSymbolObj({ symbol: symbol, name: profileJson.name, industry: profileJson.finnhubIndustry, price: quoteJson.c ? Math.round((quoteJson.c + Number.EPSILON) * 100) / 100 : 'N/A', marketCap: profileJson.marketCapitalization, exchange: profileJson.exchange });
     };
     FetchData();
+    const interval = setInterval(FetchData, 300000);
+    return () => clearInterval(interval);
   }, [symbol]);
 
   return (
