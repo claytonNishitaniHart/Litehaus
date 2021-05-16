@@ -19,7 +19,7 @@ const Search = ({ updateSymbols, currentSymbols }) => {
   };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={(e) => { e.preventDefault(); }}>
       <label className={styles.label}>Search</label>
       <input className={`${styles.input} ${results && results.length > 0 ? styles.inputShowing : ''}`} onChange={(e) => handleChange(e.target.value)} />
       <ul className={results ? styles.results : styles.hidden}>
