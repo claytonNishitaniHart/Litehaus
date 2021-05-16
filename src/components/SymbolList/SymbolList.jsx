@@ -8,17 +8,19 @@ const SymbolList = ({ symbols }) => {
     <>
       <div className={styles.header}>
         <p>Symbol</p>
-        <p>Name</p>
-        <p>Industry</p>
-        <p>Price</p>
-        <p>Market Cap</p>
-        <p>Exchange</p>
+        <p className={styles.name}>Name</p>
+        <p className={`${styles.wideOnly} ${styles.industry}`}>Industry</p>
+        <p className={styles.price}>Price</p>
+        <p className={`${styles.wideOnly} ${styles.marketCap}`}>Market Cap</p>
+        <p className={`${styles.wideOnly} ${styles.exchange}`}>Exchange</p>
       </div>
-      {symbols.map((symbol, index) => {
-        return (
-          <SymbolListItem key={index} symbol={symbol} />
-        );
-      })}
+      <div className={styles.list}>
+        {symbols.map((symbol, index) => {
+          return (
+            <SymbolListItem key={index} symbol={symbol} />
+          );
+        })}
+      </div>
     </>
   );
 };

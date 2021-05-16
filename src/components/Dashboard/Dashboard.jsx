@@ -114,10 +114,14 @@ const Dashboard = ({ setLoggedIn }) => {
         <button className={styles.dropDownButton} onClick={() => logout()}><div className={styles.svg}><HiOutlineLogout /></div><p>Logout</p></button>
       </div>
       <div className={styles.content}>
-        <h2 className={styles.add}>Add a new stock</h2>
-        <Search updateSymbols={handleUpdateSymbols} currentSymbols={symbols} />
-        <h2 className={styles.watching}>Stocks you're watching</h2>
-        <SymbolList symbols={symbols ? symbols.split(',') : []} />
+        <div className={styles.add}>
+          <h2 className={styles.addTitle}>Add a new stock</h2>
+          <Search updateSymbols={handleUpdateSymbols} currentSymbols={symbols} />
+        </div>
+        <div className={styles.list}>
+          <h2 className={styles.watching}>Stocks you're watching</h2>
+          <SymbolList symbols={symbols ? symbols.split(',') : []} />
+        </div>
       </div>
     </main>
   );

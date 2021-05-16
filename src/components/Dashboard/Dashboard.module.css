@@ -10,16 +10,43 @@
   color: white;
 }
 
+@media (min-width: 1000px) {
+  .title {
+  position: absolute;
+  top: 2rem;
+  left: 12.5rem;
+  }
+}
+
 .content {
   text-align: left;
   margin: 0 10vw;
 }
 
-.add {
+@media (min-width: 1000px) {
+  .content {
+    margin: 10rem 12.5rem 0 12.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .add {
+    text-align: center;
+    padding: 0 16rem;
+  }
+}
+
+.addTitle {
   font-family: 'Playfair Display SC';
   font-weight: 900;
   font-size: 2.25rem;
   color: white;
+}
+
+@media (min-width: 1000px) {
+  .addTitle {
+    font-size: 3rem;
+  }
 }
 
 .watching {
@@ -29,10 +56,23 @@
   color: white;
 }
 
+@media (min-width: 1000px) {
+  .watching {
+    font-size: 2.25rem;
+  }
+}
+
 .userDropDown {
   position: absolute;
   top: 2rem;
   right: 2rem;
+}
+
+@media (min-width: 1000px) {
+  .userDropDown {
+    top: 4rem;
+    right: 12.5rem;
+  }
 }
 
 .greeting {
@@ -63,6 +103,13 @@
   border: 2px solid white;
   border-radius: 5px;
   background-color: #0B2540;
+}
+
+@media (min-width: 1000px) {
+  #dropDown {
+    top: 6.5rem;
+    right: 12.5rem;
+  }
 }
 
 .svg {

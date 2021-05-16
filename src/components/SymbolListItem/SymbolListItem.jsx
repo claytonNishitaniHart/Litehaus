@@ -26,11 +26,11 @@ const SymbolListItem = ({ symbol }) => {
   return (
     <div className={styles.container}>
       <p>{symbolObj.symbol}</p>
-      <p>{symbolObj.name}</p>
-      <p>{symbolObj.industry}</p>
-      <p>{symbolObj.price}</p>
-      <p>{symbolObj.marketCap}</p>
-      <p>{symbolObj.exchange}</p>
+      <p className={styles.name}>{symbolObj.name}</p>
+      <p className={`${styles.wideOnly} ${styles.industry}`}>{symbolObj.industry}</p>
+      <p className={styles.price}>{symbolObj.price}</p>
+      <p className={`${styles.wideOnly} ${styles.marketCap}`}>{symbolObj.marketCap}</p>
+      <p className={`${styles.wideOnly} ${styles.exchange}`}>{symbolObj.exchange}</p>
     </div>
   );
 };

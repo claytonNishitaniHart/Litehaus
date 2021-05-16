@@ -1,11 +1,53 @@
 .header {
+  position: relative;
+  height: 2.5rem;
   border-bottom: 5px solid #2570BE;
 }
 
 .header > p {
+  position: absolute;
   display: inline-block;
   color: white;
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
+}
+
+.name {
+  left: 5rem;
+}
+
+@media (min-width: 1000px) {
+  .industry {
+    left: 30rem
+  }
+}
+
+.price {
+  right: 0;
+}
+
+@media (min-width: 1000px) {
+  .price {
+    right: inherit;
+    left: 38rem;
+  }
+
+  .marketCap {
+    left: 42rem;
+  }
+
+  .exchange {
+    right: 0;
+  }
+}
+
+.wideOnly {
+  display: none !important;
+}
+
+@media (min-width: 1000px) {
+  .wideOnly {
+    display: inline-block !important;
+  }
 }

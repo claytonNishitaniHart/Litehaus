@@ -1,3 +1,7 @@
+.form {
+  text-align: left;
+}
+
 .label {
   display: block;
   font-family: 'Poppins', sans-serif;
