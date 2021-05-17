@@ -64,6 +64,7 @@ const Dashboard = ({ setLoggedIn }) => {
 
   const handleUpdateSymbols = (e, newSymbol) => {
     e.preventDefault();
+    e.stopPropagation();
     let symbolsArr = symbols ? symbols.split(',') : [];
     if (symbolsArr.includes(newSymbol)) {
       symbolsArr = symbolsArr.filter((x) => {
@@ -100,7 +101,6 @@ const Dashboard = ({ setLoggedIn }) => {
           .then(response => response.json())
           .then(json => setSymbols(json.user.symbols));
       })
-    return false;
   }
 
   return (
