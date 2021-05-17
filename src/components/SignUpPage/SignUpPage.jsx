@@ -100,7 +100,7 @@ const SignUpPage = ({ setLoggedIn }) => {
           <p id='passwordLabel'>Password</p>
           <input className={styles.input} type='password' onChange={(e) => setPassword(e.target.value)} />
         </label>
-        <button className={styles.button} onClick={(e) => submitForm(e)}>{working ? <img className={styles.loading} src={loading} alt='loading...' /> : 'Continue'}</button>
+        <button className={`${styles.button} ${working ? styles.working : ''}`} onClick={(e) => submitForm(e)}>{working ? <img className={styles.loading} src={loading} alt='loading...' /> : 'Continue'}</button>
         <p className={styles.signinText}>Already have an account? <a className={styles.signinLink} href='/signin'>Sign In</a></p>
       </form>
     </main>

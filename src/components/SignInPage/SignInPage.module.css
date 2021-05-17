@@ -140,6 +140,11 @@
   transition: color linear 0.125s;
 }
 
+.working {
+  position: relative;
+  background-color: #EB5569;
+}
+
 @media (min-width: 1000px) {
   .button {
     margin-top: 3rem;
@@ -160,6 +165,10 @@
 }
 
 .loading {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 2rem;
   width: 2rem;
 }

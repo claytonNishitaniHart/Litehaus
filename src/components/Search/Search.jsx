@@ -18,8 +18,13 @@ const Search = ({ updateSymbols, currentSymbols }) => {
     input.length === 0 ? setResults(null) : setResults(result.result);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    return false;
+  }
+
   return (
-    <form className={styles.form} onSubmit={(e) => { e.preventDefault(); }}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.label}>Search</label>
       <input className={`${styles.input} ${results && results.length > 0 ? styles.inputShowing : ''}`} onChange={(e) => handleChange(e.target.value)} />
       <ul className={results ? styles.results : styles.hidden}>
