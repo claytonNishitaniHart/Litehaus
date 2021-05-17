@@ -100,6 +100,7 @@ const Dashboard = ({ setLoggedIn }) => {
           .then(response => response.json())
           .then(json => setSymbols(json.user.symbols));
       })
+    return false;
   }
 
   return (
