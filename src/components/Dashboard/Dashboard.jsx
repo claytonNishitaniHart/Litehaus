@@ -64,7 +64,6 @@ const Dashboard = ({ setLoggedIn }) => {
 
   const handleUpdateSymbols = (e, newSymbol) => {
     e.preventDefault();
-    console.log('updating symbols');
     let symbolsArr = symbols ? symbols.split(',') : [];
     if (symbolsArr.includes(newSymbol)) {
       symbolsArr = symbolsArr.filter((x) => {
